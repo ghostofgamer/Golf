@@ -7,11 +7,7 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject[] _shopItems;
 
-    private void Start()
-    {
-    }
-
-    private void Open()
+    private void OnEnable()
     {
         OpenShopItems(0);
     }
