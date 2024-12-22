@@ -9,7 +9,7 @@ public class Wallet : MonoBehaviour
     
     public int Coin { get;private set; }
     
-    private void Start()
+    private void Awake()
     {
         Coin = PlayerPrefs.GetInt("Coin", _defaultCoinValue);
     }

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -5,6 +6,11 @@ public class WalletViewer : MonoBehaviour
 {
     [SerializeField] private Wallet _wallet;
     [SerializeField] private TMP_Text _valueText;
+
+    private void Start()
+    {
+        ChangeValue(_wallet.Coin);
+    }
 
     private void OnEnable()
     {

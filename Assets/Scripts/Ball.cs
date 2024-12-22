@@ -49,7 +49,6 @@ public class Ball : MonoBehaviour
         {
             EndDrag();
         }
-        Debug.Log(_rb.velocity.magnitude);
         
         if (_rb.velocity.magnitude < 0.3f)
         {
@@ -62,6 +61,7 @@ public class Ball : MonoBehaviour
     {
         if (other.GetComponent<Hole>())
         {
+            Debug.Log("Попал");
             HoleCompleted?.Invoke();
             gameObject.SetActive(false);
         }
@@ -74,7 +74,7 @@ public class Ball : MonoBehaviour
         startPoint = Camera.main.ScreenToWorldPoint(mousePosition);
         // Debug.Log("Start Drag at: " + startPoint);
         
-        
+        // Debug.Log("StartDrag");
         
         // startPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _isDragging = true;
@@ -100,6 +100,8 @@ public class Ball : MonoBehaviour
                 // Debug.Log("Большеg");
                 direction = direction.normalized * maxDragDistance;
             }
+            
+            // Debug.Log("Dragigng");
              _lr.enabled = true;
             _lr.SetPosition(0, transform.position);
             // _lr.SetPosition(1, startPoint - direction);
@@ -117,8 +119,10 @@ public class Ball : MonoBehaviour
             
             _lr.SetPosition(0, Vector3.zero);
             _lr.SetPosition(1, Vector3.zero);
-            
+
+
             Vector2 direction = startPoint - endPoint;
+            // Debug.Log("StopDrag " + direction);
             // Debug.Log("_isDraggingEND " + direction);
 
 
@@ -135,6 +139,7 @@ public class Ball : MonoBehaviour
             
             
             _rb.AddForce(direction * 10000f);
+            // Debug.Log("ПОСЛЕ");
         }
     }
     
