@@ -18,11 +18,12 @@ public class Ball : MonoBehaviour
     private bool _isDragging;
     private bool _inHole;
     
-    
     private Vector2 startPoint;
     private Vector2 startPointNew ;
     private Vector2 endPoint;
     public float maxDragDistance = 2f;
+
+    public event Action HoleCompleted;
     
     void Start()
     {
@@ -54,6 +55,15 @@ public class Ball : MonoBehaviour
         {
             _rb.velocity = Vector2.zero;
             _rb.angularVelocity = 0f;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<Hole>())
+        {
+            HoleCompleted?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 
