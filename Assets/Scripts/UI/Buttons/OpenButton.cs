@@ -1,8 +1,12 @@
+using UI.Screens;
 using UnityEngine;
 
-public class OpenButton : AbstractButton
+namespace UI.Buttons
 {
-    [SerializeField] private GameObject _screen;
+    public class OpenButton : AbstractButton
+    {
+        [SerializeField] private AbstractScreen _screen;
 
-    protected override void OnClick() => _screen.SetActive(true);
+        protected override void OnClick() => _screen.OpenScreen();
+    }
 }

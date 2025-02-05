@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI.Screens;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ChangeShopItemsButton : AbstractButton
 {
     [SerializeField] private int _index;
-    [SerializeField] private Shop _shop;
+    [FormerlySerializedAs("_shop")] [SerializeField] private ShopScreen shopScreen;
     
     protected override void OnClick()
     {
-        _shop.ChangeShopItems(_index);
+        shopScreen.ChangeShopItems(_index);
     }
 }
