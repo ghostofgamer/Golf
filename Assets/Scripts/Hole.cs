@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Hole : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform _center;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Transform Center => _center;
 }

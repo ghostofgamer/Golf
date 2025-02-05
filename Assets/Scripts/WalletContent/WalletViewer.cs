@@ -7,11 +7,6 @@ public class WalletViewer : MonoBehaviour
     [SerializeField] private Wallet _wallet;
     [SerializeField] private TMP_Text _valueText;
 
-    private void Start()
-    {
-        ChangeValue(_wallet.Coin);
-    }
-
     private void OnEnable()
     {
         ChangeValue(_wallet.Coin);
@@ -21,6 +16,11 @@ public class WalletViewer : MonoBehaviour
     private void OnDisable()
     {
         _wallet.CoinChanged -= ChangeValue;
+    }
+
+    private void Start()
+    {
+        ChangeValue(_wallet.Coin);
     }
 
     private void ChangeValue(int value)

@@ -1,12 +1,13 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Level : MonoBehaviour
 {
     [SerializeField] private Transform _startBallPosition;
     [SerializeField] private Ball _ball;
-    [SerializeField] private SOLevelStarsConfig _starsConfig;
+    [FormerlySerializedAs("_starsConfig")] [SerializeField] private SOLevelConfig config;
 
-    public SOLevelStarsConfig StarsConfig => _starsConfig;
+    public SOLevelConfig Config => config;
 
     public Transform StartBallPosition => _startBallPosition;
 

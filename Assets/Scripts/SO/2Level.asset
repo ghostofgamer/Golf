@@ -15,3 +15,4 @@ MonoBehaviour:
   _threeStarSteps: 3
   _twoStarSteps: 5
   _oneStarSteps: 6
+  _maxStep: 5

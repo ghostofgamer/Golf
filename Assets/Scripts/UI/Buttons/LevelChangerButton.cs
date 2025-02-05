@@ -11,8 +11,7 @@ public class LevelChangerButton : AbstractButton
     [SerializeField] private GameObject _closeObject;
 
     public int Price => _price;
-
-
+    
     protected override void OnClick()
     {
         PlayerPrefs.SetInt("CurrentLevel",_index);

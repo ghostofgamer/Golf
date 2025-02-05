@@ -36,6 +36,11 @@ public class TileMapScaler : MonoBehaviour
 
         // Установите размер сетки тайлов в зависимости от разрешения экрана
         transform.localScale = new Vector3(tileScale, tileScale, 1);
+        
+        
+        
+        /*Vector3 newPosition = new Vector3(cameraWidth - (tilesWidth * tileSize / 2), cameraHeight / 2 - (tilesHeight * tileSize / 2), 0);
+        transform.position = newPosition;*/
     }
     /*void AdjustTileMapScale()
     {

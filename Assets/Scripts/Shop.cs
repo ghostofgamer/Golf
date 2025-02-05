@@ -1,15 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject[] _shopItems;
-
+    [SerializeField] private SelectSpriteBallButton[] _selectSpriteBallButton;
+    [SerializeField] private SelectBackGroundButton[] _selectBackGroundButtons;
+    [SerializeField] private SelectStickButton[] _selectStickButtons;
+    
     private void OnEnable()
     {
         OpenShopItems(0);
+        CheckPurchased();
     }
 
     public void ChangeShopItems(int index)
@@ -23,5 +24,17 @@ public class Shop : MonoBehaviour
             shopitem.SetActive(false);
 
         _shopItems[index].SetActive(true);
+    }
+
+    private void CheckPurchased()
+    {
+        foreach (var selectSpriteButton in _selectSpriteBallButton)
+            selectSpriteButton.CheckPurchase();
+
+        foreach (var selectSpriteButton in _selectBackGroundButtons)
+            selectSpriteButton.CheckPurchase();
+
+        foreach (var selectSpriteButton in _selectStickButtons)
+            selectSpriteButton.CheckPurchase();
     }
 }
