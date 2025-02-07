@@ -7,19 +7,21 @@ namespace CameraContent
         [SerializeField] private Ball _ball;
         [SerializeField] private float _smoothSpeed = 0.125f;
         [SerializeField] private Vector3 _offset;
+        private Vector3 _desiredPosition;
+        private Vector3 _smoothedPosition;
         
-        private void Start()
-        {
-        
-        }
-
-        void LateUpdate()
+        private void LateUpdate()
         {
             if (!_ball.IsMoving) return;
             
-            Vector3 desiredPosition = _ball.transform.position + _offset;
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed);
-            transform.position = smoothedPosition;
+            Follow();
+        }
+
+        private void Follow()
+        {
+            _desiredPosition = _ball.transform.position + _offset;
+            _smoothedPosition = Vector3.Lerp(transform.position, _desiredPosition, _smoothSpeed);
+            transform.position = _smoothedPosition; 
         }
     }
 }

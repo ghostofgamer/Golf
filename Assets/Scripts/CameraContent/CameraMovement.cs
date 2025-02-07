@@ -8,13 +8,11 @@ namespace CameraContent
         [SerializeField] private float moveSpeed = 5.0f;
         [SerializeField] private Vector2 _minBounds;
         [SerializeField] private Vector2 _maxBounds;
-        [SerializeField] private CameraFollow _cameraFollow;
-        [SerializeField] private float _smoothTime = 0.3f;
-        
+
         private bool _isCanMove;
         private Vector3 _lastMousePosition;
         private bool _isDragging = false;
-        
+
         private void OnEnable()
         {
             _ball.StopedBall += AllowMove;
@@ -32,13 +30,11 @@ namespace CameraContent
             if (!_isCanMove)
             {
                 _isDragging = false;
-                _cameraFollow.enabled = true;
                 return;
             }
 
             if (Input.GetMouseButtonDown(0))
             {
-                // _cameraFollow.enabled = false;
                 _isDragging = true;
                 _lastMousePosition = Input.mousePosition;
             }
@@ -53,25 +49,23 @@ namespace CameraContent
                 newPosition.y = Mathf.Clamp(newPosition.y, _minBounds.y, _maxBounds.y);
 
                 transform.position = Vector3.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
-                // transform.position = newPosition;
                 _lastMousePosition = Input.mousePosition;
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                // _cameraFollow.enabled = true;
                 _isDragging = false;
             }
         }
 
         private void AllowMove()
         {
-           _isCanMove = true; 
-        } 
+            _isCanMove = true;
+        }
 
         private void ProhibitionDrag()
         {
             _isCanMove = false;
-        } 
+        }
     }
 }
