@@ -31,25 +31,28 @@ public class Ball : MonoBehaviour
     private Vector2 startPointNew;
     private Vector2 endPoint;
     public float maxDragDistance = 2f;
-
     public float teleportDelay = 0.1f;
     private float stopTimeThreshold = 0.5f;
     private float stopTimeElapsed = 0f;
-
     private bool justTeleported = true;
     private bool _isInHole = false;
-
-
+    public float raycastDistance = 5f;
+    public LayerMask layerMask;
+    
+    
     public event Action HoleCompleted;
 
     public event Action StepDone;
 
     public event Action StopedBall;
     
+    public event Action StartDragBall;
+    
     public event Action Died;
 
     private void OnEnable()
     {
+        StopedBall?.Invoke();
         _isMoving = false;
         clubTransform.gameObject.SetActive(true);
     }
@@ -62,11 +65,26 @@ public class Ball : MonoBehaviour
         clubTransform.gameObject.SetActive(true);
     }
 
+    void OnMouseDown()
+    {
+        StartDrag();
+    }
+
+    void OnMouseDrag()
+    {
+        ContinueDrag();
+    }
+
+    void OnMouseUp()
+    {
+        EndDrag();
+    }
+    
     private void Update()
     {
         startPointNew = transform.position;
 
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             StartDrag();
         }
@@ -77,9 +95,9 @@ public class Ball : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             EndDrag();
-        }
+        }*/
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<Hole>())
@@ -87,7 +105,6 @@ public class Ball : MonoBehaviour
             _isInHole = true;
             HoleCompleted?.Invoke();
             StartCoroutine(ShrinkAndMove(other.transform));
-            // gameObject.SetActive(false);
         }
 
         if (other.GetComponent<Portal>())
@@ -116,17 +133,11 @@ public class Ball : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / moveDuration;
-
-            // Перемещаем объект к центру лунки
             transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
-
-            // Уменьшаем объект в размерах
             transform.localScale = Vector3.Lerp(initialScale, Vector3.zero, t);
-
             yield return null;
         }
-
-        // Убедимся, что объект достиг конечной позиции и размера
+        
         obj.position = targetPosition;
         obj.localScale = Vector3.zero;
         gameObject.SetActive(false);
@@ -142,6 +153,7 @@ public class Ball : MonoBehaviour
     {
         if (_isMoving) return;
 
+        StartDragBall?.Invoke();
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = Camera.main.nearClipPlane;
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(mousePosition);
