@@ -49,6 +49,8 @@ public class Ball : MonoBehaviour
     public event Action StartDragBall;
     
     public event Action Died;
+    
+    public bool IsMoving => _isMoving;
 
     private void OnEnable()
     {

@@ -38,7 +38,7 @@ namespace CameraContent
 
             if (Input.GetMouseButtonDown(0))
             {
-                _cameraFollow.enabled = false;
+                // _cameraFollow.enabled = false;
                 _isDragging = true;
                 _lastMousePosition = Input.mousePosition;
             }
@@ -59,7 +59,7 @@ namespace CameraContent
 
             if (Input.GetMouseButtonUp(0))
             {
-                _cameraFollow.enabled = true;
+                // _cameraFollow.enabled = true;
                 _isDragging = false;
             }
         }
