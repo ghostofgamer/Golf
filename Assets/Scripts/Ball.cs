@@ -39,6 +39,9 @@ public class Ball : MonoBehaviour
     public float raycastDistance = 5f;
     public LayerMask layerMask;
     
+    public float clubDistanceFromBall = 1.0f; 
+    public float maxSwingAngle = 90f;
+    
     
     public event Action HoleCompleted;
 
@@ -61,6 +64,7 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
+        StopedBall?.Invoke();
         _rb = GetComponent<Rigidbody2D>();
         _lr.positionCount = 2;
         _lr.enabled = false;
@@ -186,14 +190,24 @@ public class Ball : MonoBehaviour
             _lr.SetPosition(1, startPointNew + direction * 15f);
 
             float t = Mathf.Clamp01(direction.magnitude / maxDragDistance);
+            // float rotationZ = t * maxSwingAngle;
+            
             float maxRotationAngle = 45f; // Максимальный угол поворота
             float accelerationFactor = 15f; // Коэффициент ускорения
             float rotationZ = t * maxRotationAngle * accelerationFactor;
-            clubTransform.localEulerAngles = new Vector3(0, 0, rotationZ);
+            
+            Vector2 toBall = transform.position - clubTransform.position;
+            float angle = Mathf.Atan2(toBall.y, toBall.x) * Mathf.Rad2Deg;
+            
+            clubTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - rotationZ));
+            // clubTransform.localEulerAngles = new Vector3(0, 0, rotationZ);
             
             Vector3 ballPosition = transform.position; 
-            Vector3 clubOffset = new Vector3(-direction.x, -direction.y, 0).normalized * 0.5f;
+            // Vector3 clubOffset = new Vector3(-direction.x, -direction.y, 0).normalized * 0.5f;
+            Vector3 clubOffset = new Vector3(-direction.x, -direction.y, 0).normalized * clubDistanceFromBall;
             clubTransform.position = ballPosition + clubOffset;
+            
+            // clubTransform.LookAt(ballPosition, Vector3.up);
         }
     }
 

@@ -1,23 +1,27 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class ScreenAnimation : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private RectTransform _screen;
-    [SerializeField] private float animationDuration = 0.15f;
-    private Vector2 offScreenPosition;
-    private Vector2 onScreenPosition;
-    
-    private void OnEnable()
+    public class ScreenAnimation : MonoBehaviour
     {
-        offScreenPosition = new Vector2(0, -Screen.height*1.5f);
-        onScreenPosition = new Vector2(0, 0);
-        _screen.anchoredPosition = offScreenPosition;
-        ShowShopScreen();
-    }
-    
-    private void ShowShopScreen()
-    {
-        _screen.DOAnchorPos(onScreenPosition, animationDuration);
+        [SerializeField] private RectTransform _screen;
+        [SerializeField] private float animationDuration = 0.15f;
+
+        private Vector2 offScreenPosition;
+        private Vector2 onScreenPosition;
+
+        private void OnEnable()
+        {
+            offScreenPosition = new Vector2(0, -Screen.height * 1.5f);
+            onScreenPosition = new Vector2(0, 0);
+            _screen.anchoredPosition = offScreenPosition;
+            ShowShopScreen();
+        }
+
+        private void ShowShopScreen()
+        {
+            _screen.DOAnchorPos(onScreenPosition, animationDuration);
+        }
     }
 }
