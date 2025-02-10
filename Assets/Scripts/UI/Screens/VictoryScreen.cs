@@ -16,7 +16,7 @@ public class VictoryScreen : MonoBehaviour
     [SerializeField] private Wallet _wallet;
     [SerializeField] private ParticleSystem[] _effects;
     
-    private float _animationDuration = 1.0f;
+    private float _animationDuration = 0.65f;
     private Vector2 _offScreenPosition;
     private Vector2 _onScreenPosition;
     
