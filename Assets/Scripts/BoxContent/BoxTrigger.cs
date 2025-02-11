@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http.Headers;
+using BallContent;
 using UnityEngine;
 
 public class BoxTrigger : MonoBehaviour
