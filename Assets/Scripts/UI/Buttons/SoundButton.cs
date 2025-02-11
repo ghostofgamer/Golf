@@ -1,13 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Singletons;
 
-public class SoundButton : AbstractButton
+namespace UI.Buttons
 {
-    [SerializeField] private Settings _settings;
-    
-    protected override void OnClick()
+    public class SoundButton : ChangeAudioButton
     {
-        _settings.ChangeSound();
+        protected override void OnClick()
+        {
+            ChangeValue();
+        }
+
+        protected override void ChangeValue()
+        {
+            SoundSettings.Instance.SetSound(!SoundSettings.Instance.IsSoundOn);
+            base.ChangeValue();
+        }
     }
 }

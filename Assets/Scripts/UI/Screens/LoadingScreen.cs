@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -11,18 +12,11 @@ namespace UI.Screens
     public class LoadingScreen : AbstractScreen
     {
         public Slider _loadingSlider;
-        public Text _loadingText;
+        public TMP_Text _loadingText;
         public AssetReference sceneReference;
         
         private AsyncOperationHandle<SceneInstance> _loadOperation;
         private Coroutine _loadingCoroutine;
-
-        /*public override void OpenScreen()
-        {
-            /*base.OpenScreen();
-            LoadScene("LevelsScene");#1#
-            // LoadScene();
-        }*/
 
         public void LoadScene(string sceneName)
         {

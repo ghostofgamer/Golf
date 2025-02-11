@@ -21,6 +21,7 @@ namespace UI.Screens
         private IEnumerator StartPause()
         {
             yield return new WaitForSeconds(0.7f);
+            Debug.Log("Pause Screen");
             Time.timeScale = 0;
         }
     }

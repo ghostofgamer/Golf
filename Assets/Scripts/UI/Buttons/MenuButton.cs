@@ -1,8 +1,14 @@
-using UnityEngine.SceneManagement;
+using UI.Screens;
+using UnityEngine;
 
-public class MenuButton : AbstractButton
+namespace UI.Buttons
 {
-    private const string MainMenu = "MainMenu";
+    public class MenuButton : AbstractButton
+    {
+        [SerializeField] private LoadingScreen _loadingScreen;
     
-    protected override void OnClick()=> SceneManager.LoadScene(MainMenu);
+        private const string MainMenu = "MainMenu";
+
+        protected override void OnClick() => _loadingScreen.LoadScene(MainMenu);
+    }
 }
