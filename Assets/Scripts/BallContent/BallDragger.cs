@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BallContent
 {
-    [RequireComponent(typeof(BallInput), typeof(BallMover),typeof(LineRenderer))]
+    [RequireComponent(typeof(BallMover),typeof(LineRenderer))]
     public class BallDragger : MonoBehaviour
     {
         [SerializeField]private Stick _stick;
@@ -32,7 +32,7 @@ namespace BallContent
 
         private void Awake()
         {
-            _ballInput = GetComponent<BallInput>();
+            _ballInput = GetComponentInChildren<BallInput>();
             _ballMover = GetComponent<BallMover>();
             _lr = GetComponent<LineRenderer>();
         }
