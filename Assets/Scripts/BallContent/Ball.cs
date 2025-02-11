@@ -176,7 +176,7 @@ namespace BallContent
             }
         }*/
 
-        private IEnumerator MoveChecker()
+        /*private IEnumerator MoveChecker()
         {
             yield return new WaitForSeconds(1f);
 
@@ -204,7 +204,7 @@ namespace BallContent
 
                 yield return null;
             }
-        }
+        }*/
 
         public void Die()
         {

@@ -7,10 +7,9 @@ namespace BallContent
     public class BallDragger : MonoBehaviour
     {
         [SerializeField] private LineRenderer _lr;
-        [SerializeField] private Rigidbody2D _rb;
         
-        public Transform clubTransform;
-        public float clubDistanceFromBall = 1.0f;
+        // public Transform clubTransform;
+        [SerializeField]private Stick _stick;
         
         private bool _isDragging;
         private Vector2 startPointNew;
@@ -31,7 +30,7 @@ namespace BallContent
         
         public event Action StepDone;
         
-        public event Action EndDragBall;
+        public event Action<Vector2> EndDragBall;
 
         private void Awake()
         {
@@ -65,9 +64,6 @@ namespace BallContent
             StartDragBall?.Invoke();
             Vector3 mousePosition = mouseCurrentPosition;
             mousePosition.z = Camera.main.nearClipPlane;
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(mousePosition);
-            Collider2D ballCollider = GetComponent<Collider2D>();
-            
             startPoint = Camera.main.ScreenToWorldPoint(mousePosition);
             _isDragging = true;
         }
@@ -77,7 +73,6 @@ namespace BallContent
             if (_isDragging)
             {
                 Vector3 mousePosition = mouseCurrentPosition;
-                Debug.Log("фывфывфвфвфвфвф " + mouseCurrentPosition);
                 mousePosition.z = Camera.main.nearClipPlane;
                 endPoint = Camera.main.ScreenToWorldPoint(mousePosition);
                 Vector2 direction = startPoint - endPoint;
@@ -90,16 +85,8 @@ namespace BallContent
                 _lr.enabled = true;
                 _lr.SetPosition(0, transform.position);
                 _lr.SetPosition(1, startPointNew + direction * 15f);
-                float t = Mathf.Clamp01(direction.magnitude / maxDragDistance);
-                float maxRotationAngle = 45f; 
-                float accelerationFactor = 15f; 
-                float rotationZ = t * maxRotationAngle * accelerationFactor;
-                Vector2 toBall = transform.position - clubTransform.position;
-                float angle = Mathf.Atan2(toBall.y, toBall.x) * Mathf.Rad2Deg;
-                clubTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - rotationZ));
-                Vector3 ballPosition = transform.position;
-                Vector3 clubOffset = new Vector3(-direction.x, -direction.y, 0).normalized * clubDistanceFromBall;
-                clubTransform.position = ballPosition + clubOffset;
+                float normalizedDragDistance = Mathf.Clamp01(direction.magnitude / maxDragDistance);
+                _stick.Dragging(transform.position,normalizedDragDistance,direction);
             }
         }
         
@@ -107,22 +94,14 @@ namespace BallContent
         {
             if (_isDragging)
             {
-                EndDragBall?.Invoke();
-                
-                // _isMoving = true;
                 _isDragging = false;
                 _lr.enabled = false;
                 _lr.SetPosition(0, Vector3.zero);
                 _lr.SetPosition(1, Vector3.zero);
                 Vector2 direction = startPoint - endPoint;
-                direction.x = Mathf.Clamp(direction.x, minX, maxX);
-                direction.y = Mathf.Clamp(direction.y, minY, maxY);
-                _rb.AddForce(direction * 10000f);
+                EndDragBall?.Invoke(direction);
                 StepDone?.Invoke();
-
-                clubTransform.gameObject.SetActive(false);
-                clubTransform.localEulerAngles = Vector3.zero;
-                // StartCoroutine(MoveChecker());
+                _stick.ReturnDefaultLocalEuler();
             }
         }
     }

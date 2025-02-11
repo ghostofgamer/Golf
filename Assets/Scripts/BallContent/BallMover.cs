@@ -1,18 +1,32 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace BallContent
 {
-    [RequireComponent(typeof(BallDragger))]
+    [RequireComponent(typeof(BallDragger), typeof(Rigidbody2D), typeof(BallHole))]
     public class BallMover : MonoBehaviour
     {
+        [SerializeField] private Stick _stick;
+
+        private Rigidbody2D _rb;
+        private BallHole _ballHole;
         private BallDragger _ballDragger;
-    
+
+        float maxX = 0.06f;
+        float minX = -0.06f;
+        float maxY = 0.06f;
+        float minY = -0.06f;
+        
+        public event Action StopedBall;
+
         public bool IsMoving { get; private set; }
 
         private void Awake()
         {
             _ballDragger = GetComponent<BallDragger>();
+            _ballHole = GetComponent<BallHole>();
+            _rb = GetComponent<Rigidbody2D>();
         }
 
         private void OnEnable()
@@ -22,31 +36,37 @@ namespace BallContent
 
         private void OnDisable()
         {
-            
+            _ballDragger.EndDragBall -= StartMove;
         }
 
-        public void StartMove()
+        public void StartMove(Vector2 direction)
         {
             IsMoving = true;
+
+            direction.x = Mathf.Clamp(direction.x, minX, maxX);
+            direction.y = Mathf.Clamp(direction.y, minY, maxY);
+            _rb.AddForce(direction * 10000f);
+
+            StartCoroutine(MoveChecker());
         }
 
-        /*private IEnumerator MoveChecker()
+        private IEnumerator MoveChecker()
         {
             yield return new WaitForSeconds(1f);
 
-            while (_isMoving)
+            while (IsMoving)
             {
-                if (_rb.velocity.magnitude > 0.01f)
+                if (_rb.velocity.magnitude > 0.01f && _stick.gameObject.activeSelf)
                 {
-                    clubTransform.gameObject.SetActive(false);
+                    _stick.SetValue(false);
                 }
                 else if (_rb.velocity.magnitude < 0.01f)
                 {
-                    if (_isInHole) yield break;
+                    if (_ballHole.IsInHole) yield break;
 
                     StopedBall?.Invoke();
-                    _isMoving = false;
-                    clubTransform.gameObject.SetActive(true);
+                    IsMoving = false;
+                    _stick.SetValue(true);
                     yield break;
                 }
 
@@ -58,6 +78,6 @@ namespace BallContent
 
                 yield return null;
             }
-        }*/
+        }
     }
 }

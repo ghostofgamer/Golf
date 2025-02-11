@@ -9,9 +9,10 @@ namespace BallContent
         [SerializeField] private float moveDuration = 1.0f;
         
         private BallTrigger _ballTrigger;
-        private bool _isInHole = false;
-        
+
         public event Action HoleCompleted;
+        
+        public bool IsInHole { get; private set; }
         
         private void Awake()
         {
@@ -30,7 +31,7 @@ namespace BallContent
         
         private void RollInHoll(Hole hole)
         {
-            _isInHole = true;
+            IsInHole = true;
             HoleCompleted?.Invoke();
             StartCoroutine(ShrinkAndMove(hole));
         }
