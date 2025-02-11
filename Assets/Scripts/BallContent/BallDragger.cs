@@ -3,14 +3,12 @@ using UnityEngine;
 
 namespace BallContent
 {
-    [RequireComponent(typeof(BallInput), typeof(BallMover))]
+    [RequireComponent(typeof(BallInput), typeof(BallMover),typeof(LineRenderer))]
     public class BallDragger : MonoBehaviour
     {
-        [SerializeField] private LineRenderer _lr;
-        
-        // public Transform clubTransform;
         [SerializeField]private Stick _stick;
         
+        private LineRenderer _lr;
         private bool _isDragging;
         private Vector2 startPointNew;
         private Vector2 startPoint;
@@ -36,6 +34,7 @@ namespace BallContent
         {
             _ballInput = GetComponent<BallInput>();
             _ballMover = GetComponent<BallMover>();
+            _lr = GetComponent<LineRenderer>();
         }
 
         private void OnEnable()
@@ -51,7 +50,13 @@ namespace BallContent
             _ballInput.MouseDragged -= ContinueDrag;
             _ballInput.MouseUpClicked -= EndDrag;
         }
-        
+
+        private void Start()
+        {
+            _lr.positionCount = 2;
+            _lr.enabled = false;
+        }
+
         private void Update()
         {
             startPointNew = transform.position;

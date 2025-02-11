@@ -5,7 +5,9 @@ using UnityEngine.Serialization;
 
 public class StepCounter : MonoBehaviour
 {
-    [SerializeField] private Ball _ball;
+    private Ball _ball;
+    private BallDragger _ballDragger;
+    private BallMover _ballMover;
 
     private Level _level;
 
@@ -21,15 +23,20 @@ public class StepCounter : MonoBehaviour
 
     private void OnDisable()
     {
-        _ball.StepDone -= IncreaseStep;
-        _ball.StopedBall -= CheckSteps;
+        // _ball.StepDone -= IncreaseStep;
+        _ballDragger.StepDone -= IncreaseStep;
+        // _ball.StopedBall -= CheckSteps;
+        _ballMover.StopedBall -= CheckSteps;
     }
 
-    public void Init(Ball ball, Level level)
+    public void Init(BallDragger ball,BallMover ballMover, Level level)
     {
-        _ball = ball;
-        _ball.StepDone += IncreaseStep;
-        _ball.StopedBall += CheckSteps;
+        _ballDragger = ball;
+        _ballMover=ballMover;
+        // _ball.StepDone += IncreaseStep;
+        _ballDragger.StepDone += IncreaseStep;
+        _ballMover.StopedBall += CheckSteps;
+        // _ball.StopedBall += CheckSteps;
         _level = level;
         MaxSteps = _level.Config.MaxStep;
         RemainingSteps = MaxSteps;
@@ -47,7 +54,7 @@ public class StepCounter : MonoBehaviour
     {
         if (RemainingSteps <= 0)
         {
-            _ball.Die();
+            // _ball.Die();
             StepsOver?.Invoke();
         }
     }

@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         if (other.TryGetComponent(out Ball ball))
         {
             transform.localPosition = _startPosition;
-            ball.Revert();
+            // ball.Revert();
         }
     }
 

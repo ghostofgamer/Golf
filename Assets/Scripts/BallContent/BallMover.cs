@@ -32,11 +32,19 @@ namespace BallContent
         private void OnEnable()
         {
             _ballDragger.EndDragBall += StartMove;
+            IsMoving = false;
+            _stick.SetValue(true);
         }
 
         private void OnDisable()
         {
             _ballDragger.EndDragBall -= StartMove;
+        }
+
+        private void Start()
+        {
+            StopedBall?.Invoke();
+            _stick.SetValue(true);
         }
 
         public void StartMove(Vector2 direction)

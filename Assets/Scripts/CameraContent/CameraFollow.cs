@@ -5,7 +5,7 @@ namespace CameraContent
 {
     public class CameraFollow : MonoBehaviour
     {
-        [SerializeField] private Ball _ball;
+        [SerializeField] private BallMover _ball;
         [SerializeField] private float _smoothSpeed = 0.125f;
         [SerializeField] private Vector3 _offset;
         private Vector3 _desiredPosition;

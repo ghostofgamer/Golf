@@ -5,7 +5,8 @@ namespace CameraContent
 {
     public class CameraMovement : MonoBehaviour
     {
-        [SerializeField] private Ball _ball;
+        [SerializeField] private BallDragger _ball;
+        [SerializeField] private BallMover _ballMover;
         [SerializeField] private float moveSpeed = 5.0f;
         [SerializeField] private Vector2 _minBounds;
         [SerializeField] private Vector2 _maxBounds;
@@ -16,13 +17,13 @@ namespace CameraContent
 
         private void OnEnable()
         {
-            _ball.StopedBall += AllowMove;
+            _ballMover.StopedBall += AllowMove;
             _ball.StartDragBall += ProhibitionDrag;
         }
 
         private void OnDisable()
         {
-            _ball.StopedBall -= AllowMove;
+            _ballMover.StopedBall -= AllowMove;
             _ball.StartDragBall -= ProhibitionDrag;
         }
 
