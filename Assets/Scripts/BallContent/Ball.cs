@@ -77,7 +77,7 @@ namespace BallContent
             clubTransform.gameObject.SetActive(true);
         }
 
-        void OnMouseDown()
+        /*void OnMouseDown()
         {
             StartDrag();
         }
@@ -116,7 +116,9 @@ namespace BallContent
         {
             if (_isDragging)
             {
+                
                 Vector3 mousePosition = Input.mousePosition;
+                Debug.Log("фывфывфвфвфвфвф " + Input.mousePosition);
                 mousePosition.z = Camera.main.nearClipPlane;
                 endPoint = Camera.main.ScreenToWorldPoint(mousePosition);
                 Vector2 direction = startPoint - endPoint;
@@ -172,7 +174,7 @@ namespace BallContent
                 clubTransform.localEulerAngles = Vector3.zero;
                 StartCoroutine(MoveChecker());
             }
-        }
+        }*/
 
         private IEnumerator MoveChecker()
         {
