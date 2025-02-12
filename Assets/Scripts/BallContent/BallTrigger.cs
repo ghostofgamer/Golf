@@ -1,11 +1,7 @@
 using System;
-using System.Diagnostics;
-using Environment;
 using Interfaces;
 using Singletons;
-using Unity.VisualScripting;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace BallContent
 {
