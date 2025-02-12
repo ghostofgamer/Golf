@@ -22,7 +22,6 @@ namespace UI
         public void StartUI()
         {
             _value = PlayerPrefs.GetInt(Key, 1) == 1;
-            Debug.Log(_value );
             Image.sprite = _value ? SpriteOn : SpriteOff;
         }
     }

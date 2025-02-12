@@ -1,8 +1,15 @@
 using UnityEngine;
 
-public class BackButton : AbstractButton
+namespace UI.Buttons
 {
-    [SerializeField] private GameObject _screen;
+    public class BackButton : AbstractButton
+    {
+        [SerializeField] private GameObject _screen;
     
-    protected override void OnClick()=> _screen.SetActive(false);
+        protected override void OnClick()
+        {
+            base.OnClick();
+            _screen.SetActive(false);
+        }
+    }
 }

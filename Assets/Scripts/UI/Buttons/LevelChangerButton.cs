@@ -17,6 +17,7 @@ namespace UI.Buttons
     
         protected override void OnClick()
         {
+            base.OnClick();
             PlayerPrefs.SetInt("CurrentLevel",_index);
             _loadingScreen.LoadScene(SceneLoader);
             // SceneManager.LoadScene(SceneLoader);

@@ -7,6 +7,10 @@ namespace UI.Buttons
     {
         [SerializeField] private AbstractScreen _screen;
 
-        protected override void OnClick() => _screen.OpenScreen();
+        protected override void OnClick()
+        {
+            base.OnClick();
+            _screen.OpenScreen();
+        }
     }
 }

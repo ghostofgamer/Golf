@@ -21,7 +21,7 @@ namespace UI
 
         private void ShowShopScreen()
         {
-            _screen.DOAnchorPos(onScreenPosition, animationDuration);
+            _screen.DOAnchorPos(onScreenPosition, animationDuration).SetUpdate(true);
         }
     }
 }

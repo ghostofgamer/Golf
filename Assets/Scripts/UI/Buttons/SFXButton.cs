@@ -6,6 +6,7 @@ namespace UI.Buttons
     {
         protected override void OnClick()
         {
+            base.OnClick();
             ChangeValue();
         }
 

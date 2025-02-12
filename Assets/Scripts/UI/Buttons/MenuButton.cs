@@ -9,6 +9,11 @@ namespace UI.Buttons
     
         private const string MainMenu = "MainMenu";
 
-        protected override void OnClick() => _loadingScreen.LoadScene(MainMenu);
+        protected override void OnClick()
+        {
+            Time.timeScale = 1;
+            base.OnClick();
+            _loadingScreen.LoadScene(MainMenu);
+        }
     }
 }

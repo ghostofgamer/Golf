@@ -1,18 +1,23 @@
 using UnityEngine;
 
-public class BuyLifeButton : AbstractButton
+namespace UI.Buttons
 {
-    [SerializeField] private Wallet _wallet;
-    [SerializeField]private LifeCounter _lifeCounter;
-
-    private int _price = 100;
-
-
-    protected override void OnClick()
+    public class BuyLifeButton : AbstractButton
     {
-        if (_wallet.Coin < _price) return;
+        [SerializeField] private Wallet _wallet;
+        [SerializeField]private LifeCounter _lifeCounter;
+
+        private int _price = 100;
+
+
+        protected override void OnClick()
+        {
+            base.OnClick();
         
-        _lifeCounter.IncreaseLife();
-        _wallet.DecreaseCoin(_price);
+            if (_wallet.Coin < _price) return;
+        
+            _lifeCounter.IncreaseLife();
+            _wallet.DecreaseCoin(_price);
+        }
     }
 }

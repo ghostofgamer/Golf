@@ -8,6 +8,7 @@ namespace UI.Buttons
 
         protected virtual void ChangeValue()
         {
+            base.OnClick();
             _audioIconViewer.StartUI();
         }
     }

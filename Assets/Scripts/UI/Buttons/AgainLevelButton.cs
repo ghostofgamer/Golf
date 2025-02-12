@@ -2,19 +2,23 @@ using UI.Screens;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class AgainLevelButton : AbstractButton
+namespace UI.Buttons
 {
-    [SerializeField] private LoadingScreen _loadingScreen; 
+    public class AgainLevelButton : AbstractButton
+    {
+        [SerializeField] private LoadingScreen _loadingScreen; 
     
-    protected override void OnClick()
-    {
-        RestartCurrentScene();
-    }
+        protected override void OnClick()
+        {
+            base.OnClick();
+            RestartCurrentScene();
+        }
 
-    private void RestartCurrentScene()
-    {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        _loadingScreen.LoadScene(currentSceneName);
-        // SceneManager.LoadScene(currentSceneName);
+        private void RestartCurrentScene()
+        {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            _loadingScreen.LoadScene(currentSceneName);
+            // SceneManager.LoadScene(currentSceneName);
+        }
     }
 }

@@ -1,27 +1,31 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Singletons;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class AbstractButton : MonoBehaviour
+namespace UI.Buttons
 {
-    protected Button Button {get; private set; }
+    public abstract class AbstractButton : MonoBehaviour
+    {
+        protected Button Button {get; private set; }
     
-    private void Awake()
-    {
-        Button = GetComponent<Button>();
-    }
+        private void Awake()
+        {
+            Button = GetComponent<Button>();
+        }
 
-    private void OnEnable()
-    {
-        Button.onClick.AddListener(OnClick);
-    }
+        private void OnEnable()
+        {
+            Button.onClick.AddListener(OnClick);
+        }
 
-    private void OnDisable()
-    {
-        Button.onClick.RemoveListener(OnClick);
-    }
+        private void OnDisable()
+        {
+            Button.onClick.RemoveListener(OnClick);
+        }
 
-    protected abstract void OnClick();
+        protected virtual void OnClick()
+        {
+            SoundGamePlayer.Instance.PlayButtonClickSound();
+        }
+    }
 }

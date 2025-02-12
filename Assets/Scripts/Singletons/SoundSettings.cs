@@ -117,33 +117,11 @@ namespace Singletons
             {
                 _audioMixerGroup.audioMixer.SetFloat(_volumeParameter, IsSoundOn ? _valueEnabled : _valueDisabled);
                 _audioMixerGroup.audioMixer.SetFloat(_sfxParameter, IsSFXOn ? _valueEnabled : _valueDisabled);
-
-                if (_audioMixerGroup.audioMixer.GetFloat(_volumeParameter, out float soundVolume))
-                {
-                    Debug.Log("SoundSettings: Loaded Sound Volume: " + soundVolume);
-                }
-                else
-                {
-                    Debug.LogError("SoundSettings: Failed to get sound volume.");
-                }
-
-                if (_audioMixerGroup.audioMixer.GetFloat(_sfxParameter, out float sfxVolume))
-                {
-                    Debug.Log("SoundSettings: Loaded SFX Volume: " + sfxVolume);
-                }
-                else
-                {
-                    Debug.LogError("SoundSettings: Failed to get SFX volume.");
-                }
             }
             else
             {
                 Debug.LogError("SoundSettings: AudioMixerGroup or AudioMixer is not assigned.");
             }
-
-            /*
-            SetSound(IsSoundOn);
-            SetSFX(IsSFXOn);*/
         }
     }
 }

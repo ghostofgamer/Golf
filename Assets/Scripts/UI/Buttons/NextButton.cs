@@ -1,17 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NextButton : AbstractButton
+namespace UI.Buttons
 {
-    private const string SceneLoader = "LevelsScene";
-    
-    private int _defaultIndex = 0;
-    
-    protected override void OnClick()
+    public class NextButton : AbstractButton
     {
-        int currentLevelIndex = PlayerPrefs.GetInt("CurrentLevel",_defaultIndex);
-        int index = currentLevelIndex + 1;
-        PlayerPrefs.SetInt("CurrentLevel",index);
-        SceneManager.LoadScene(SceneLoader);
+        private const string SceneLoader = "LevelsScene";
+    
+        private int _defaultIndex = 0;
+    
+        protected override void OnClick()
+        {
+            base.OnClick();
+            int currentLevelIndex = PlayerPrefs.GetInt("CurrentLevel",_defaultIndex);
+            int index = currentLevelIndex + 1;
+            PlayerPrefs.SetInt("CurrentLevel",index);
+            SceneManager.LoadScene(SceneLoader);
+        }
     }
 }
