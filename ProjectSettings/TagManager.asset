@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -11,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Laser
   - 
   - 
   - 
@@ -43,4 +44,7 @@ TagManager:
     locked: 0
   - name: Ball
     uniqueID: 2620853059
+    locked: 0
+  - name: Laser
+    uniqueID: 1668509993
     locked: 0

@@ -41,8 +41,9 @@ public class LevelStarter : MonoBehaviour
         ballReturner.Init(_levels[currentLevelIndex].BallTrigger);
         _levels[currentLevelIndex].Ball.GetComponent<SpriteRenderer>().sprite = _spriteInventory.GetBallSprite(indexBallSprite);
         _levels[currentLevelIndex].Stick.sprite = _spriteInventory.GetStickSprite(indexStickSprite);
-        _backGroundImage.sprite = _spriteInventory.GetBackgroundSprite(indexBackgroundSprite);
+        // _backGroundImage.sprite = _spriteInventory.GetBackgroundSprite(indexBackgroundSprite);
         _victoryScreen.Init(_levels[currentLevelIndex].BallHole, _levels[currentLevelIndex]);
+        _loseScreen.Init(_levels[currentLevelIndex].BallTrigger);
         _stepCounter.Init(_levels[currentLevelIndex].BallDragger,_levels[currentLevelIndex].BallMover, _levels[currentLevelIndex]);
     }
 }

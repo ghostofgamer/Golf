@@ -2322,6 +2322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1176151476}
   _buttonClickSound: {fileID: 8300000, guid: a1fe7d3c1686ac04bbede73fc76a56b5, type: 3}
+  _hitBallSound: {fileID: 8300000, guid: 9ceea9378a5d6f041851dbb63f3e4f8f, type: 3}
 --- !u!4 &1176151478
 Transform:
   m_ObjectHideFlags: 0

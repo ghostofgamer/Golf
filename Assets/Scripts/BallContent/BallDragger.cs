@@ -1,4 +1,5 @@
 using System;
+using Singletons;
 using UnityEngine;
 
 namespace BallContent
@@ -99,6 +100,7 @@ namespace BallContent
         {
             if (_isDragging)
             {
+                SoundGamePlayer.Instance.PlayHitBall();
                 _isDragging = false;
                 _lr.enabled = false;
                 _lr.SetPosition(0, Vector3.zero);

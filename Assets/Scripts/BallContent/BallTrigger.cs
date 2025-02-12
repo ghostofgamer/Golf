@@ -1,5 +1,11 @@
 using System;
+using System.Diagnostics;
+using Environment;
+using Interfaces;
+using Singletons;
+using Unity.VisualScripting;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace BallContent
 {
@@ -10,6 +16,8 @@ namespace BallContent
         public event Action<Hole> TouchedHole;
 
         public event Action Revert;
+
+        public event Action Lose;
     
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -20,12 +28,18 @@ namespace BallContent
 
             if (other.TryGetComponent(out Portal portal))
             {
+                SoundGamePlayer.Instance.TeleportationBall();
                 TouchedPortal?.Invoke(portal);
             }
             
             if (other.TryGetComponent(out Enemy enemy))
             {
                 Revert?.Invoke();
+            }
+
+            if (other.TryGetComponent(out ILoseTrigger loseTrigger))
+            {
+                Lose?.Invoke();
             }
         }
     }

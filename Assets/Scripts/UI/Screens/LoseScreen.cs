@@ -17,6 +17,7 @@ namespace UI.Screens
         private BallHole _ballHole;
         private Vector2 offScreenPosition;
         private Vector2 onScreenPosition;
+        private BallTrigger _ballTrigger;
     
         private void OnEnable()
         {
@@ -26,6 +27,7 @@ namespace UI.Screens
         private void OnDisable()
         {
             _stepCounter.StepsOver -= Open;
+            _ballTrigger.Lose -= Open;
         }
 
         private void Start()
@@ -33,6 +35,12 @@ namespace UI.Screens
             offScreenPosition = new Vector2(0, -Screen.height);
             onScreenPosition = new Vector2(0, 0);
             loseScreen.anchoredPosition = offScreenPosition;
+        }
+
+        public void Init(BallTrigger ballTrigger)
+        {
+            _ballTrigger = ballTrigger;
+            _ballTrigger.Lose += Open;
         }
     
         private void Open()
